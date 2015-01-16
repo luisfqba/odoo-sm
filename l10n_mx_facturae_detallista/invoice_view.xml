@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+        <record model="ir.ui.view" id="view_account_invoice_form_inh_custom_detallista">
+            <field name="name">view.account.invoice.form.inh.custom.detallista</field>
+            <field name="type">form</field>
+            <field name="model">account.invoice</field>
+            <field name="inherit_id" ref="account.invoice_form" />
+            <field name="arch" type="xml">
+                <notebook position="inside">
+                    <page string="Detallista" groups="l10n_mx_facturae_detallista.group_facturae_mx_detallista_manager">
+                        <separator string="Complemento Detallista" />
+                        <group col="2">
+			                <separator string="Buyer Information" />
+                        	<group>
+    	                        <field name="det_buyer_name" colspan="2"/>
+         	                </group>
+            				<separator string="Order Identification" />
+                        	<group>    
+    	                        <field name="det_oi_ref_date" colspan="2"/>
+         	                </group>
+                            <separator string="Additional Information" />
+                            <group>
+                                <field name="det_ai_ref" colspan="2"/>
+        	                </group>
+			                <separator string="Delivery Note" />
+                            <group>
+                                <field name="det_dn_ref" colspan="2"/>
+                                <field name="det_dn_date" colspan="2" string="Cita"/>
+                            </group>
+                        </group>
+                    </page>
+                </notebook>
+            </field>
+        </record>
+    </data>
+</openerp>

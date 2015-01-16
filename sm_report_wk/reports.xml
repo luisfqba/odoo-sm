@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+  <data>
+    <report id="smreport_sale_order_wk"
+            name="smreport.sale.order.wk"
+            auto="False"
+            model="sale.order"
+            file="sm_report_wk/report/sale_order.mako"
+            string="Formato de Pedido"
+            webkit_header="sm_base_headers_webkit.sm_base_reports_portrait_header"
+            report_type="webkit" 
+            />
+  </data>
+</openerp>

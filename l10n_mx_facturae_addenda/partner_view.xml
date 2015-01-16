@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+        
+        <record model="ir.ui.view" id="view_partner_form_inh_addenda_form">
+            <field name="name">view.partner.form.inh.addenda.form</field>
+            <field name="type">form</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.view_partner_form"/>
+            <field name="arch" type="xml">
+                <notebook position="inside">
+                    <page string="Addenda">
+                        <group>
+                            <group>
+                                <field name="num_proveedor" string="Num. Proveedor" />
+                                <field name="addenda_type" string="Tipo de Addenda" />
+                            </group>
+                        </group>
+                    </page>
+                </notebook>
+            </field>
+        </record>
+        
+    </data>
+</openerp>

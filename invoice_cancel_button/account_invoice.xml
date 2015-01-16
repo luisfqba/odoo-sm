@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+	<data>
+        <record model="ir.ui.view" id="view_account_invoice_form_inh_btn_cancel">
+            <field name="name">view.account.invoice.form.inh.btn.cancel</field>
+            <field name="type">form</field>
+            <field name="model">account.invoice</field>
+            <field name="inherit_id" ref="account.invoice_form" />
+            <field name="arch" type="xml">
+                <button name="invoice_cancel" position="replace"/>
+                <field name="state" position="after">
+                    <button name="invoice_cancel" states="draft,proforma2,open" string="Cancel Invoice" groups="base.group_no_one"/>
+                </field>
+            </field>
+        </record>
+    </data>
+</openerp>

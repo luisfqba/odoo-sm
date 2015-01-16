@@ -1,0 +1,90 @@
+<?xml version="1.0"?>
+<openerp>
+    <data>
+        <record id="sm_delivery_simple_carrier_form" model="ir.ui.view">
+            <field name="name">sm.delivery.simple.carrier.form</field>
+            <field name="model">sm.delivery.simple.carrier</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <field name="name" />
+                <field name="partner_id" />
+                <field name="active" />
+            </field>
+        </record>
+
+        <record id="sm_delivery_costs_concept_form" model="ir.ui.view">
+            <field name="name">sm.delivery.costs.concept.form</field>
+            <field name="model">sm.delivery.costs.concept</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+		<group>
+			<group>
+				<separator colspan="2"/>
+		                <field name="name" />
+	        	        <field name="description" />
+			        <field name="active" />
+			</group>
+		</group>
+            </field>
+        </record>
+
+        <record id='sale_order_deliverysimple_form_inh' model='ir.ui.view'>
+            <field name='name'>sale.order.deliverysimple.form.inh</field>
+            <field name='model'>sale.order</field>
+            <field name="inherit_id" ref="sale.view_order_form"/>
+            <field name="arch" type="xml">
+                <field name='client_order_ref' position='after'>
+                    <newline/>
+                    <field name="carrier_shipped_date" />
+                    <field name='sm_state' />
+                </field>
+                <notebook position='inside'>
+                    <page string="Transportista">
+                        <group>
+                            <group>
+                                <separator string='Transporte de Embarque' colspan='2'/>
+                                <field name="sm_carrier_id" string="Transportista" context="{'order_id':active_id or False}"/>
+                                <field name="carrier_ref" />
+                                <field name='check_guide' />
+                                <field name='carrier_delivery_date'/>
+                                <field name='carrier_exclude_check' />
+                            </group>
+                            <group>
+                                <separator string='Transporte de Reembarque' colspan='2'/>
+                                <field name="re_carrier_name" />
+                                <field name="re_carrier_ref" />
+                                <field name="re_check_guide" />
+                            </group>
+                        </group>
+                    </page>
+        		    <page string="Costos">
+        		        <field name="sm_cost" readonly="1" />
+	                    <field name="costs_lines">
+                            <form string="Lineas Costos Extra" version="7.0">
+                                <group>
+                                    <group>
+                                        <field name="concept_id"/>
+				                        <label for="note" />
+                                        <div>
+                                            <field name="note" required="True" class="oe_inline"/>
+                                        </div>
+                                        <label for="amount"/>
+                                        <div>
+                                            <field name="amount" class="oe_inline"/>
+                                        </div>
+                                    </group>
+                                </group>
+            				</form>
+			            	<tree string="Lineas Costos Extra" editable="bottom">
+			            	    <field name="concept_id"/>
+                                <field name="note"/>
+                                <field name="amount"/>
+                            </tree>
+			            </field>
+			            
+	                </page>
+                </notebook>
+            </field>
+        </record>	
+    </data>
+</openerp>
