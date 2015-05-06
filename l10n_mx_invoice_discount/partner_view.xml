@@ -7,13 +7,12 @@
             <field name="model">res.partner</field>
             <field name="inherit_id" ref="base.view_partner_form"/>
             <field name="arch" type="xml">
-                <xpath expr="//field[@name='parent_id']" position="before">
-                    <field name="discount"/>
-                    <field name="motive_discount"/>
+                <xpath expr="/form/sheet/notebook/page/group/group/field[@name='user_id']" position="before">
+	                <field name="discount" string="Descuento"/>
+	                <field name="motive_discount" string="Motivo del Descuento"/>	                
                 </xpath>
-
             </field>
         </record>
-
+        
     </data>
 </openerp>

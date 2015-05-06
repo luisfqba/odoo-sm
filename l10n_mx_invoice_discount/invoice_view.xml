@@ -8,9 +8,9 @@
             <field name="arch" type="xml">
                 <xpath expr="//field[@name='fiscal_position']" position="after">
                     <newline/>
-                    <field name="global_discount_percent" colspan="2"/>
-                    <field name="motive_discount" colspan="2"/>
-                    <field name="global_discount_amount" colspan="2"/>
+                    <field name="global_discount_percent" colspan="2" string="Porciento de Cantidad de Descuento"/>
+                    <field name="motive_discount" colspan="2" string="Motivo del Descuento"/>
+                    <field name="global_discount_amount" colspan="2" string="Monto Global de Descuento"/>
                 </xpath>
             </field>
         </record>

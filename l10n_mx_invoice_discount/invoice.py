@@ -54,30 +54,32 @@ class account_invoice(osv.Model):
         sub_tot = 0
         for line in invoice.invoice_line:
             sub_tot += line.price_unit * line.quantity
-            invoice_data_parents[0]['Comprobante']['Conceptos'][
-                invoice.invoice_line.index(line)]['Concepto']\
+            invoice_data_parents[0]['cfdi:Comprobante']['cfdi:Conceptos'][
+                invoice.invoice_line.index(line)]['cfdi:Concepto']\
                 ['cantidad'] = line.quantity or '0.0'
-            invoice_data_parents[0]['Comprobante']['Conceptos']\
-                [invoice.invoice_line.index(line)]['Concepto']\
+            invoice_data_parents[0]['cfdi:Comprobante']['cfdi:Conceptos']\
+                [invoice.invoice_line.index(line)]['cfdi:Concepto']\
                 ['descripcion'] = line.name or ' '
-            invoice_data_parents[0]['Comprobante']['Conceptos']\
-                [invoice.invoice_line.index(line)]['Concepto']\
+            invoice_data_parents[0]['cfdi:Comprobante']['cfdi:Conceptos']\
+                [invoice.invoice_line.index(line)]['cfdi:Concepto']\
                 ['importe'] = line.price_unit * line.quantity or '0'
-            invoice_data_parents[0]['Comprobante']['Conceptos']\
-                [invoice.invoice_line.index(line)]['Concepto']\
+            invoice_data_parents[0]['cfdi:Comprobante']['cfdi:Conceptos']\
+                [invoice.invoice_line.index(line)]['cfdi:Concepto']\
                 ['noIdentificacion'] = line.product_id.default_code or '-'
-            invoice_data_parents[0]['Comprobante']['Conceptos']\
-                [invoice.invoice_line.index(line)]['Concepto']\
+            invoice_data_parents[0]['cfdi:Comprobante']['cfdi:Conceptos']\
+                [invoice.invoice_line.index(line)]['cfdi:Concepto']\
                 ['unidad'] = line.uos_id and line.uos_id.name or ''
-            invoice_data_parents[0]['Comprobante']['Conceptos']\
-                [invoice.invoice_line.index(line)]['Concepto']\
+            invoice_data_parents[0]['cfdi:Comprobante']['cfdi:Conceptos']\
+                [invoice.invoice_line.index(line)]['cfdi:Concepto']\
                 ['valorUnitario'] = line.price_unit or '0'
-
-        invoice_data_parents[0]['Comprobante'][
-            'motivoDescuento'] = invoice.motive_discount or ''
-        invoice_data_parents[0]['Comprobante']['descuento'] = invoice.\
+        
+        if invoice.motive_discount:
+            invoice_data_parents[0]['cfdi:Comprobante'][
+                'motivoDescuento'] = invoice.motive_discount
+                #'motivoDescuento'] = invoice.motive_discount or False
+        invoice_data_parents[0]['cfdi:Comprobante']['descuento'] = invoice.\
             global_discount_amount and '%.3f' % invoice.global_discount_amount or '0'
-        invoice_data_parents[0]['Comprobante']['subTotal'] = sub_tot
+        invoice_data_parents[0]['cfdi:Comprobante']['subTotal'] = sub_tot
         return invoice_data_parents
 
     def check_tax_lines(self, cr, uid, inv, compute_taxes, ait_obj):
@@ -87,8 +89,8 @@ class account_invoice(osv.Model):
             for line in inv.invoice_line:
                 disc_amount_line += line.price_unit * \
                     line.quantity * (inv.global_discount_percent/100 or 1)
-            disc_line = float('%.3f' % disc_amount_line)
-            disc_ammount = float('%.3f' % inv.global_discount_amount)
+            disc_line = float('%.2f' % disc_amount_line)
+            disc_ammount = float('%.2f' % inv.global_discount_amount)
             if disc_line != disc_ammount:
                 raise osv.except_osv(_('Warning !'), _(
                     'Global Discount Amount was changed!\nClick on compute to update tax base'))
